@@ -1,40 +1,23 @@
-extends partial/layout
+{% extends '_layout.swig' %}
+{% import '_macro/post.swig' as post_template %}
+{% import '_macro/sidebar.swig' as sidebar_template %}
 
-block styles
-    != css('css/index.css?v='+date(Date.now(), 'YYYYMMDDHHmm'))
+{% block title %}{{ config.title }}{% if theme.index_with_subtitle and config.subtitle %} - {{config.subtitle }}{% endif %}{% endblock %}
 
-block container
-    main
-        div.blogtab
-            each item in page.posts.data
-                .blogs(data-scroll-reveal="enter bottom over 1s")
-                    h3.blogtitle
-                        a(href=url_for(item.path), target='_blank')= item.title
-                    span.blogpic
-                        a(href=url_for(item.path), title=item.title)
-                            img(src=url_for(item.cover_picture), alt='')
-                    p.blogtext!= item.excerpt || truncate(strip_html(item.content), {length: 120})
-                    .bloginfo
-                        ul
-                            li.author
-                                a(href='/')!= item.author || getConfig('author')
-                            li.lmname
-                                a(href=url_for(getValue(item, "categories.data.0.path")))!= getValue(item, "categories.data.0.name")
-                            li.timer!= date(item.date, 'YYYY-MM-DD HH:mm:ss')
-                            //li.view
-                            //    span 34567
-                            //    | 已阅读
-                            //li.like 9999
-        .pagelist
-            !=paginator({prev_text:"<i class='iconfont icon-page-pre' ></i>",next_text:"<i class='iconfont icon-page-next' ></i>",escape: false})
-    aside.r_box
-        include mixins/right
-        +card()
-        +category()
-        +recommend()
-        +tags()
-        +wechat()
-block scripts
-    include mixins/scripts
-    +canvas()
-    != js('js/common.js?v='+date(Date.now(), 'YYYYMMDDHHmm'), 'js/index.js?v='+date(Date.now(), 'YYYYMMDDHHmm'))
+{% block page_class %}
+  {% if is_home() %}page-home{% endif -%}
+{% endblock %}
+
+{% block content %}
+  <section id="posts" class="posts-expand">
+    {% for post in page.posts %}
+      {{ post_template.render(post, true) }}
+    {% endfor %}
+  </section>
+
+  {% include '_partials/pagination.swig' %}
+{% endblock %}
+
+{% block sidebar %}
+  {{ sidebar_template.render(false) }}
+{% endblock %}

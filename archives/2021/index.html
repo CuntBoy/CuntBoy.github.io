@@ -1,40 +1,62 @@
-extends partial/layout
+{% extends '_layout.swig' %}
+{% import '_macro/post-collapse.swig' as post_template %}
+{% import '_macro/sidebar.swig' as sidebar_template %}
 
-block styles
-    != css('css/index.css?v='+date(Date.now(), 'YYYYMMDDHHmm'))
+{% block title %}{{ __('title.archive') }} | {{ config.title }}{% endblock %}
 
-block container
-    main
-        div.blogtab
-            each item in page.posts.data
-                .blogs(data-scroll-reveal="enter bottom over 1s")
-                    h3.blogtitle
-                        a(href=url_for(item.path), target='_blank')= item.title
-                    span.blogpic
-                        a(href=url_for(item.path), title=item.title)
-                            img(src=url_for(item.cover_picture), alt='')
-                    p.blogtext!= item.excerpt || truncate(strip_html(item.content), {length: 120})
-                    .bloginfo
-                        ul
-                            li.author
-                                a(href='/')!= item.author || getConfig('author')
-                            li.lmname
-                                a(href=url_for(getValue(item, "categories.data.0.path")))!= getValue(item, "categories.data.0.name")
-                            li.timer!= date(item.date, 'YYYY-MM-DD HH:mm:ss')
-                            //li.view
-                            //    span 34567
-                            //    | 已阅读
-                            //li.like 9999
-        .pagelist
-            !=paginator({prev_text:"<i class='iconfont icon-page-pre' ></i>",next_text:"<i class='iconfont icon-page-next' ></i>",escape: false})
-    aside.r_box
-        include mixins/right
-        +card()
-        +category()
-        +recommend()
-        +tags()
-        +wechat()
-block scripts
-    include mixins/scripts
-    +canvas()
-    != js('js/common.js?v='+date(Date.now(), 'YYYYMMDDHHmm'), 'js/index.js?v='+date(Date.now(), 'YYYYMMDDHHmm'))
+{% block page_class %}page-archive{% endblock %}
+
+{% block content %}
+
+  {#####################}
+  {### ARCHIVE BLOCK ###}
+  {#####################}
+  <div class="post-block archive">
+    <div id="posts" class="posts-collapse">
+      <span class="archive-move-on"></span>
+
+      <span class="archive-page-counter">
+        {% set cheers %}
+        {% set posts_length = site.posts.length %}
+        {% if posts_length > 210 %} {% set cheers = 'excellent' %}
+          {% elif posts_length > 130 %} {% set cheers = 'great' %}
+          {% elif posts_length > 80 %} {% set cheers = 'good' %}
+          {% elif posts_length > 50 %} {% set cheers = 'nice' %}
+          {% elif posts_length > 30 %} {% set cheers = 'ok' %}
+        {% else %}
+          {% set cheers = 'um' %}
+        {% endif %}
+        {{ __('cheers.' + cheers) }}! {{ _p("counter.archive_posts", site.posts.length) }} {{ __('keep_on') }}
+      </span>
+
+      {% for post in page.posts %}
+
+        {# Show year #}
+        {% set year %}
+        {% set post.year = date(post.date, 'YYYY') %}
+
+        {% if post.year !== year %}
+          {% set year = post.year %}
+          <div class="collection-title">
+            <{% if theme.seo %}h2{% else %}h1{% endif %} class="archive-year" id="archive-year-{{ year }}">{{ year }}</{% if theme.seo %}h2{% else %}h1{% endif %}>
+          </div>
+        {% endif %}
+        {# endshow #}
+
+        {{ post_template.render(post) }}
+
+      {% endfor %}
+
+    </div>
+  </div>
+  {#########################}
+  {### END ARCHIVE BLOCK ###}
+  {#########################}
+
+  {% include '_partials/pagination.swig' %}
+
+{% endblock %}
+
+{% block sidebar %}
+  {{ sidebar_template.render(false) }}
+{% endblock %}

@@ -1,65 +1,37 @@
-extends partial/layout
+{% extends '_layout.swig' %}
+{% import '_macro/post.swig' as post_template %}
+{% import '_macro/sidebar.swig' as sidebar_template %}
 
-block site_title
-    != page.title
-block styles
-    != css('css/index.css?v='+date(Date.now(), 'YYYYMMDDHHmm'),'css/info.css?v='+date(Date.now(), 'YYYYMMDDHHmm'))
-    link(href="https://cdn.bootcss.com/highlight.js/9.15.9/styles/github.min.css", rel='stylesheet')
-block container
-    main
-        .con_warp
-            .infosbox
-                .newsview
-                    h3.news_title!= page.title
-                    .bloginfo
-                        ul
-                            li.author
-                                | 作者：
-                                a(href='/')!= getValue(page, "author") || getConfig('author')
-                            li.lmname
-                                a(href='/')!= getValue(page, "categories.data.0.name")
-                            li.timer!= '时间：' + date(page.date, "YYYY-MM-DD HH:mm:ss")
-                            li.view
-                                span#busuanzi_value_page_pv 99
-                                span 次访问
-                    .tags
-                        each tag in getValue(page,"tags.data",[])
-                            a(href=url_for(tag.path), target='_blank')!= tag.name
-                    - if(page.excerpt)
-                        .news_about
-                            strong 简介
-                            != page.excerpt
-                     .news_con!= page.more || page.content
-                .nextinfo
-                    p 上一篇：
-                        - var prev = getValue(page,"prev");
-                        if(prev)
-                            a(href=url_for(prev.path))!= prev.title
-                        else
-                            != '没有了'
-                    p 下一篇：
-                        - var next = getValue(page,"next");
-                            if(next)
-                                a(href=url_for(next.path))!= next.title
-                            else
-                                != '没有了'
-                - if(page.comments)
-                    .news_pl
-                        include mixins/scripts
-                        +comment()
-    aside.r_box
-        include mixins/right
-        +card()
-        +category()
-        +wechat()
 
-block scripts
-    include mixins/scripts
-    +canvas()
-    script(src="https://cdn.bootcss.com/highlight.js/9.15.9/highlight.min.js")
-    script(src="https://cdn.bootcss.com/highlight.js/9.15.9/languages/java.min.js")
-    script(src="https://cdn.bootcss.com/highlight.js/9.15.9/languages/javascript.min.js")
-    script(type='text/javascript').
-        hljs.initHighlightingOnLoad();
-    script(async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js")
-    != js('js/common.js?v='+date(Date.now(), 'YYYYMMDDHHmm'),'js/index.js?v='+date(Date.now(), 'YYYYMMDDHHmm'))
+{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+
+{% block page_class %}page-post-detail{% endblock %}
+
+
+{% block content %}
+
+  <div id="posts" class="posts-expand">
+    {{ post_template.render(page) }}
+
+    <div class="post-spread">
+      {% if theme.jiathis %}
+        {% include '_partials/share/jiathis.swig' %}
+      {% elseif theme.baidushare %}
+        {% include '_partials/share/baidushare.swig' %}
+      {% elseif theme.add_this_id %}
+        {% include '_partials/share/add-this.swig' %}
+      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
+        {% include '_partials/share/duoshuo_share.swig' %}
+      {% endif %}
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block sidebar %}
+  {{ sidebar_template.render(true) }}
+{% endblock %}
+
+{% block script_extra %}
+  {% include '_scripts/pages/post-details.swig' %}
+{% endblock %}
