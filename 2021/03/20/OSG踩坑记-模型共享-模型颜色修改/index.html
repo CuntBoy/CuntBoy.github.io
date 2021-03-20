@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="cpp,osg," />
 
 
 
@@ -79,14 +79,18 @@
 
 
 
-<meta name="description" content="鲁迅先生说:&quot;这句话我没是说过！&quot;">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Bao&#39;s blog">
-<meta property="og:url" content="http://example.com/archives/2021/03/index.html">
+<meta name="description" content="简单概述在很多场景中，我们需要将同一个模型绘制到不同的区域并且还需要对模型进行一系列的旋转缩放等操作，同时需要使用不同的颜色，这个时候我们只需要使用一些简单的设置便可以实现这个功能功能。 伪代码：1、读入模型1234567&#x2F;&#x2F; 无论你是从外部读入模型 还是你自己构建的一个模型都是可以的。&#x2F;&#x2F; 使用osg自带读取模型的函数读取模型&#x2F;&#x2F; 推荐使用 osg 的智能指针&#x2F;&#x2F; 此处使用一个 内嵌的几何体 代">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OSG踩坑记-模型共享&amp;模型颜色修改">
+<meta property="og:url" content="http://example.com/2021/03/20/OSG%E8%B8%A9%E5%9D%91%E8%AE%B0-%E6%A8%A1%E5%9E%8B%E5%85%B1%E4%BA%AB-%E6%A8%A1%E5%9E%8B%E9%A2%9C%E8%89%B2%E4%BF%AE%E6%94%B9/index.html">
 <meta property="og:site_name" content="Bao&#39;s blog">
-<meta property="og:description" content="鲁迅先生说:&quot;这句话我没是说过！&quot;">
+<meta property="og:description" content="简单概述在很多场景中，我们需要将同一个模型绘制到不同的区域并且还需要对模型进行一系列的旋转缩放等操作，同时需要使用不同的颜色，这个时候我们只需要使用一些简单的设置便可以实现这个功能功能。 伪代码：1、读入模型1234567&#x2F;&#x2F; 无论你是从外部读入模型 还是你自己构建的一个模型都是可以的。&#x2F;&#x2F; 使用osg自带读取模型的函数读取模型&#x2F;&#x2F; 推荐使用 osg 的智能指针&#x2F;&#x2F; 此处使用一个 内嵌的几何体 代">
 <meta property="og:locale">
+<meta property="article:published_time" content="2021-03-20T12:54:22.000Z">
+<meta property="article:modified_time" content="2021-03-20T17:47:57.306Z">
 <meta property="article:author" content="Baozi">
+<meta property="article:tag" content="cpp">
+<meta property="article:tag" content="osg">
 <meta name="twitter:card" content="summary">
 
 
@@ -117,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/archives/2021/03/"/>
+  <link rel="canonical" href="http://example.com/2021/03/20/OSG踩坑记-模型共享-模型颜色修改/"/>
 
 
 
 
 
-  <title>归档 | Bao's blog</title>
+  <title>OSG踩坑记-模型共享&模型颜色修改 | Bao's blog</title>
   
 
 
@@ -142,7 +146,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -280,185 +284,222 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/20/OSG%E8%B8%A9%E5%9D%91%E8%AE%B0-%E6%A8%A1%E5%9E%8B%E5%85%B1%E4%BA%AB-%E6%A8%A1%E5%9E%8B%E9%A2%9C%E8%89%B2%E4%BF%AE%E6%94%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bao's blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">OSG踩坑记-模型共享&模型颜色修改</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-20T20:54:22+08:00">
+                2021-03-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 4 篇日志。 继续努力。
-      </span>
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/works/" itemprop="url" rel="index">
+                    <span itemprop="name">works</span>
+                  </a>
+                </span>
 
-      
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/works/GF/" itemprop="url" rel="index">
+                    <span itemprop="name">GF</span>
+                  </a>
+                </span>
 
-        
-        
-        
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/works/GF/OSG/" itemprop="url" rel="index">
+                    <span itemprop="name">OSG</span>
+                  </a>
+                </span>
 
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2021">2021</h1>
-          </div>
-        
-        
 
-        
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2021/03/20/OSG%E8%B8%A9%E5%9D%91%E8%AE%B0-%E6%A8%A1%E5%9E%8B%E5%85%B1%E4%BA%AB-%E6%A8%A1%E5%9E%8B%E9%A2%9C%E8%89%B2%E4%BF%AE%E6%94%B9/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2021/03/20/OSG踩坑记-模型共享-模型颜色修改/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2021/03/20/OSG%E8%B8%A9%E5%9D%91%E8%AE%B0-%E6%A8%A1%E5%9E%8B%E5%85%B1%E4%BA%AB-%E6%A8%A1%E5%9E%8B%E9%A2%9C%E8%89%B2%E4%BF%AE%E6%94%B9/" itemprop="url">
-              
-                <span itemprop="name">OSG踩坑记-模型共享&模型颜色修改</span>
-              
-            </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2021-03-20T20:54:22+08:00"
-              content="2021-03-20" >
-          03-20
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+          
 
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="简单概述"><a href="#简单概述" class="headerlink" title="简单概述"></a>简单概述</h3><p>在很多场景中，我们需要将同一个模型绘制到不同的区域并且还需要对模型进行一系列的旋转缩放等操作，同时需要使用不同的颜色，这个时候我们只需要使用一些简单的设置便可以实现这个功能功能。</p>
+<h3 id="伪代码："><a href="#伪代码：" class="headerlink" title="伪代码："></a>伪代码：</h3><h4 id="1、读入模型"><a href="#1、读入模型" class="headerlink" title="1、读入模型"></a>1、读入模型</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 无论你是从外部读入模型 还是你自己构建的一个模型都是可以的。</span></span><br><span class="line"><span class="comment">// 使用osg自带读取模型的函数读取模型</span></span><br><span class="line"><span class="comment">// 推荐使用 osg 的智能指针</span></span><br><span class="line"><span class="comment">// 此处使用一个 内嵌的几何体 代替模型 </span></span><br><span class="line"></span><br><span class="line">osg::ref_ptr&lt;osg::Geometry&gt; geom = <span class="keyword">new</span> osg::Geometry; </span><br><span class="line"><span class="comment">// osg 的智能指针采用引用计数的方式决定当前对象是否释放</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2、计算对模型的旋转、缩放、平移的操作矩阵"><a href="#2、计算对模型的旋转、缩放、平移的操作矩阵" class="headerlink" title="2、计算对模型的旋转、缩放、平移的操作矩阵"></a>2、计算对模型的旋转、缩放、平移的操作矩阵</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// osg 有专门用户模型操作的类  osg::MatrixTransform </span></span><br><span class="line"><span class="comment">// 创建一个对象 模型操作类中抽象了矩阵的接口 可以当做矩阵操作 本质上是一个节点 </span></span><br><span class="line">osg::ref_ptr&lt;osg::MatrixTransform&gt; trans = <span class="keyword">new</span> osg::MatrixTransform;</span><br><span class="line"><span class="comment">// 对于模型的操作，有PVM矩阵的意思 </span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建旋转矩阵 </span></span><br><span class="line">osg::Matrix matrix_rotate;</span><br><span class="line"><span class="comment">// 构建旋转，从osg坐标系的沿着Z轴方向转到X轴（都是正方向）  </span></span><br><span class="line">matrix_rotate.makeRotate(osg::vec3(<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>),osg::vec3(<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>));  <span class="comment">// 参数分别是两个方向向量 第一个参数是当前模型的方向 第二个参数是你需要旋转的方向</span></span><br><span class="line"><span class="comment">// 你也可以直接选择使用</span></span><br><span class="line">osg::Matrix::rotate(osg::Vec3(),osg::Vec3()); <span class="comment">// 输入的参数也可以是四元数  返回值是一个表示旋转的矩阵</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ==============================================================================================</span></span><br><span class="line"><span class="comment">// 也可以直接 设置最终的变换矩阵 </span></span><br><span class="line">trans-&gt;setMatrix(matrix_rotate * osg::Martix::scale(<span class="number">1.0</span>,<span class="number">1.0</span>,<span class="number">1.0</span>) * osg::translate(osg::Vec3()));</span><br><span class="line"><span class="comment">// trans 已经存储了 我们对于模型的操作 </span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3、对trans节点设置材料等属性"><a href="#3、对trans节点设置材料等属性" class="headerlink" title="3、对trans节点设置材料等属性"></a>3、对trans节点设置材料等属性</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建材质对象</span></span><br><span class="line">osg::Material* mat = <span class="keyword">new</span> osg::Material();</span><br><span class="line">mat-&gt;setColorMode(osg::Material::ColorMode::DIFFUSE);   <span class="comment">// 设置绘制颜色的模式 </span></span><br><span class="line">mat-&gt;setDiffuse(osg::Material::FRONT, osg::Vec4());      <span class="comment">// 设置此种模式下的颜色 </span></span><br><span class="line"></span><br><span class="line">trans-&gt;getOrCreateStateSet()-&gt;setAttribute(mat);        <span class="comment">// 将材质设置给 节点 </span></span><br></pre></td></tr></table></figure>
+
+<h4 id="4、将对象作为节点添加"><a href="#4、将对象作为节点添加" class="headerlink" title="4、将对象作为节点添加"></a>4、将对象作为节点添加</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">trans.addchild(geom.get());</span><br></pre></td></tr></table></figure>
+
+<h4 id="5、将操作节点添加到绘制的根节点或者是其他的叶节点"><a href="#5、将操作节点添加到绘制的根节点或者是其他的叶节点" class="headerlink" title="5、将操作节点添加到绘制的根节点或者是其他的叶节点"></a>5、将操作节点添加到绘制的根节点或者是其他的叶节点</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ......</span></span><br></pre></td></tr></table></figure>
 
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2021/03/19/Bug%E5%A5%87%E9%81%87%E8%AE%B0-uint16-t/" itemprop="url">
-              
-                <span itemprop="name">Bug奇遇记-uint16_t</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2021-03-19T20:47:11+08:00"
-              content="2021-03-19" >
-          03-19
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2021/03/18/%E8%BF%9F%E5%88%B0%E7%9A%84%E6%AF%95%E4%B8%9A%E6%80%BB%E7%BB%93/" itemprop="url">
-              
-                <span itemprop="name">迟到的毕业总结</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2021-03-18T23:59:55+08:00"
-              content="2021-03-18" >
-          03-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2021/03/16/baozi/" itemprop="url">
-              
-                <span itemprop="name">Boy</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2021-03-16T21:53:58+08:00"
-              content="2021-03-16" >
-          03-16
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/wechat-qcode.jpg" alt=" wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎关注若山</div>
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/cpp/" rel="tag"># cpp</a>
+          
+            <a href="/tags/osg/" rel="tag"># osg</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/03/19/Bug%E5%A5%87%E9%81%87%E8%AE%B0-uint16-t/" rel="next" title="Bug奇遇记-uint16_t">
+                <i class="fa fa-chevron-left"></i> Bug奇遇记-uint16_t
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -466,6 +507,20 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -486,8 +541,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -579,6 +643,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">简单概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%AA%E4%BB%A3%E7%A0%81%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">伪代码：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%E3%80%81%E8%AF%BB%E5%85%A5%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.1.</span> <span class="nav-text">1、读入模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%E3%80%81%E8%AE%A1%E7%AE%97%E5%AF%B9%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%97%8B%E8%BD%AC%E3%80%81%E7%BC%A9%E6%94%BE%E3%80%81%E5%B9%B3%E7%A7%BB%E7%9A%84%E6%93%8D%E4%BD%9C%E7%9F%A9%E9%98%B5"><span class="nav-number">2.2.</span> <span class="nav-text">2、计算对模型的旋转、缩放、平移的操作矩阵</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3%E3%80%81%E5%AF%B9trans%E8%8A%82%E7%82%B9%E8%AE%BE%E7%BD%AE%E6%9D%90%E6%96%99%E7%AD%89%E5%B1%9E%E6%80%A7"><span class="nav-number">2.3.</span> <span class="nav-text">3、对trans节点设置材料等属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4%E3%80%81%E5%B0%86%E5%AF%B9%E8%B1%A1%E4%BD%9C%E4%B8%BA%E8%8A%82%E7%82%B9%E6%B7%BB%E5%8A%A0"><span class="nav-number">2.4.</span> <span class="nav-text">4、将对象作为节点添加</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5%E3%80%81%E5%B0%86%E6%93%8D%E4%BD%9C%E8%8A%82%E7%82%B9%E6%B7%BB%E5%8A%A0%E5%88%B0%E7%BB%98%E5%88%B6%E7%9A%84%E6%A0%B9%E8%8A%82%E7%82%B9%E6%88%96%E8%80%85%E6%98%AF%E5%85%B6%E4%BB%96%E7%9A%84%E5%8F%B6%E8%8A%82%E7%82%B9"><span class="nav-number">2.5.</span> <span class="nav-text">5、将操作节点添加到绘制的根节点或者是其他的叶节点</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -737,6 +817,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -754,6 +838,18 @@
       <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
     
 
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://example.com/2021/03/20/OSG%E8%B8%A9%E5%9D%91%E8%AE%B0-%E6%A8%A1%E5%9E%8B%E5%85%B1%E4%BA%AB-%E6%A8%A1%E5%9E%8B%E9%A2%9C%E8%89%B2%E4%BF%AE%E6%94%B9/';
+          this.page.identifier = '2021/03/20/OSG踩坑记-模型共享-模型颜色修改/';
+          this.page.title = 'OSG踩坑记-模型共享&模型颜色修改';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
     
 
   
