@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-03-21T07:20:00.906Z</updated>
+  <updated>2021-04-03T16:21:37.094Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>OSG踩坑记-默认光源</title>
+    <link href="http://example.com/2021/04/04/OSG%E8%B8%A9%E5%9D%91%E8%AE%B0-%E9%BB%98%E8%AE%A4%E5%85%89%E6%BA%90/"/>
+    <id>http://example.com/2021/04/04/OSG%E8%B8%A9%E5%9D%91%E8%AE%B0-%E9%BB%98%E8%AE%A4%E5%85%89%E6%BA%90/</id>
+    <published>2021-04-03T16:10:50.000Z</published>
+    <updated>2021-04-03T16:21:37.094Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="OSG-Viewer默认光源"><a href="#OSG-Viewer默认光源" class="headerlink" title="OSG-Viewer默认光源"></a>OSG-Viewer默认光源</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">osg::Node-&gt;getOrCreateStateSet()-&gt;setMode(GL_RESCALE_NORMAL, osg::StateAttribute::ON);    <span class="comment">// 法线随着模型大小变化而变化。</span></span><br><span class="line">osg::Node-&gt;getOrCreateStateSet()-&gt;setMode(GL_LIGHTING, osg::StateAttribute::OFF | osg::StateAttribute::OVERRIDE); <span class="comment">// 关闭节点光源 并遵从父节点的光照设置</span></span><br></pre></td></tr></table></figure><hr><h5 id="不指定法向-–-仍然可以看到-光照效果-但是无法看到明暗变化"><a href="#不指定法向-–-仍然可以看到-光照效果-但是无法看到明暗变化" class="headerlink" title="不指定法向 – 仍然可以看到 光照效果 但是无法看到明暗变化 "></a><code>不指定法向</code> – <font color="red">仍然可以看到 光照效果 但是无法看到明暗变化 </font></h5><h3 id="Viewer-默认光源的使用"><a href="#Viewer-默认光源的使用" class="headerlink" title="Viewer 默认光源的使用"></a>Viewer 默认光源的使用</h3><h4 id="1、设置光照的相关的信息"><a href="#1、设置光照的相关的信息" class="headerlink" title="1、设置光照的相关的信息"></a>1、设置光照的相关的信息</h4><ul><li><p><code>osg::Viewer默认存在缺省光源,但是需要进行部分设置,不然可能与你当前的场景不匹配</code></p></li><li><p>你需要设置的信息包括: ambient、diffuse、specular、光照方向（可以不设置，使用缺省的）、光照位置、光的衰减参数。</p></li></ul><blockquote><p>设置光照  – <font color="Green">衰减公式</font><br>$$<br>F = \frac{1}{(k_c + k_l<em>d + k_q</em>d^2)}<br>$$</p></blockquote><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 获取缺省的光照</span></span><br><span class="line">osg::Light *light = viewer-&gt;getLight(); <span class="comment">// 从当前的查看器 获取光照设置 </span></span><br><span class="line">light-&gt;setAmbient(osg::Vec4(<span class="number">0.4</span>, <span class="number">0.4</span>, <span class="number">0.4</span>, <span class="number">1.0</span>));   <span class="comment">// 环境光   OPENGL的默认值是 osg::Vec3(0.2,0.2,0.2);</span></span><br><span class="line">light-&gt;setDiffuse(osg::Vec4(<span class="number">0.5</span>, <span class="number">0.5</span>, <span class="number">0.5</span>, <span class="number">1.0</span>));   <span class="comment">// 漫反射   直接来源于光源</span></span><br><span class="line">light-&gt;setSpecular(osg::Vec4(<span class="number">0.2</span>, <span class="number">0.2</span>, <span class="number">0.2</span>, <span class="number">1.0</span>));  <span class="comment">// specular   高光 此处给的很低  </span></span><br><span class="line"><span class="comment">// 由于此处我们使用的是平行光</span></span><br><span class="line"><span class="function">osg::Vec4 <span class="title">lightpos</span><span class="params">(x, y, z, <span class="number">0.0f</span>)</span></span>;   <span class="comment">// 记住: 平行光的位置的最后一个分量必须是 0 </span></span><br><span class="line">light-&gt;setPosition(lightpos);        <span class="comment">// 设置光照位置 </span></span><br><span class="line"><span class="comment">// 光照方向设置</span></span><br><span class="line"><span class="comment">// 需要用到高度角和方位角 -- 计算一个你需要方向 </span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置光的衰减 -- 只设置 常量衰减的话 --   无距离衰减</span></span><br><span class="line">light-&gt;setConstantAttenuation(<span class="number">1.0f</span>);</span><br><span class="line">light-&gt;setLinearAttenuation(<span class="number">0.0f</span>);</span><br><span class="line">light-&gt;setQuadraticAttenuation(<span class="number">0.f</span>);</span><br></pre></td></tr></table></figure><p><font color="red"> 产生平行光，位置分量的第四分量必须是0 </font></p><h4 id="2、对节点设置好材料属性"><a href="#2、对节点设置好材料属性" class="headerlink" title="2、对节点设置好材料属性"></a>2、对节点设置好材料属性</h4><ul><li>材料的设置是针对你要显示的节点设置的、你可以创建一个材料并设置相关的颜色，这样就可以拥有一个更好的显示效果。</li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;OSG-Viewer默认光源&quot;&gt;&lt;a href=&quot;#OSG-Viewer默认光源&quot; class=&quot;headerlink&quot; title=&quot;OSG-Viewer默认光源&quot;&gt;&lt;/a&gt;OSG-Viewer默认光源&lt;/h3&gt;&lt;figure class=&quot;highlight </summary>
+      
+    
+    
+    
+    <category term="works" scheme="http://example.com/categories/works/"/>
+    
+    <category term="GF" scheme="http://example.com/categories/works/GF/"/>
+    
+    <category term="OSG" scheme="http://example.com/categories/works/GF/OSG/"/>
+    
+    
+    <category term="cpp" scheme="http://example.com/tags/cpp/"/>
+    
+    <category term="osg" scheme="http://example.com/tags/osg/"/>
+    
+  </entry>
   
   <entry>
     <title>OSG踩坑记-模型共享&amp;模型颜色修改</title>
